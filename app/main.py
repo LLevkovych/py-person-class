@@ -11,15 +11,15 @@ def create_person_list(people: list) -> list:
     persons_list = [Person(person["name"], person["age"]) for person in people]
 
     for person in people:
+        name = person["name"]
+        person_obj = Person.people[name]
 
-        if person.get("wife") is not None:
+        wife_name = person.get("wife")
+        husband_name = person.get("husband")
 
-            Person.people[person.get("name")].wife \
-                = Person.people[person.get("wife")]
-
-        elif person.get("husband") is not None:
-
-            Person.people[person.get("name")].husband \
-                = Person.people[person.get("husband")]
+        if wife_name:
+            person_obj.wife = Person.people[wife_name]
+        if husband_name:
+            person_obj.husband = Person.people[husband_name]
 
     return persons_list
